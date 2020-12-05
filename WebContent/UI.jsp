@@ -48,16 +48,16 @@ body {font-size:16px;}
     <h3 class="w3-padding-64"><b>VideoCo</b></h3>
   </div>
   <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
-    <a href="#Music" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Music</a> 
-    <a href="#Movies" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Movies</a> 
-    <a href="#Comedy" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Comedy</a> 
+    <a href="#" onclick="close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
+    <a href="#Music" onclick="close()" class="w3-bar-item w3-button w3-hover-white">Music</a> 
+    <a href="#Movies" onclick="close()" class="w3-bar-item w3-button w3-hover-white">Movies</a> 
+    <a href="#Comedy" onclick="close()" class="w3-bar-item w3-button w3-hover-white">Comedy</a> 
   </div>
 </nav>
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()"></a>
+  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="open()"></a>
   <span>VideoCo</span>
 </header>
 
@@ -142,12 +142,12 @@ body {font-size:16px;}
 
 <script>
 // Script to open and close sidebar
-function w3_open() {
+function open() {
   document.getElementById("mySidebar").style.display = "block";
   document.getElementById("myOverlay").style.display = "block";
 }
  
-function w3_close() {
+function close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
 }

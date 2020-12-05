@@ -25,6 +25,7 @@ public class VideoCo extends HttpServlet {
 	private final String mainPage = "/UI.jsp";
 	private final String loginPage = "/SignIn.jsp";
 	private final String adminPage = "/Adminpage.jsp";
+	private String page;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,6 +40,7 @@ public class VideoCo extends HttpServlet {
 		super.init(config);
 		ServletContext context = getServletContext();
 		appName = context.getInitParameter(CONTEXT_APP_NAME);
+		page = this.mainPage;
 	}
 
 	/**
@@ -49,54 +51,30 @@ public class VideoCo extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.getSession().setAttribute("applicationName", appName); // pack app name
-		String page = this.mainPage;
 
-		if(!(request.getParameter("login") == null)) {
-			page = this.mainPage;
-			String username = request.getParameter("username");
-			String password = request.getParameter("password");
-			System.out.println("inputted username: " + username + " password: " + password);
-			request.getSession().setAttribute("loggedin", "1");
-			request.getSession().setAttribute("adminloggedin", "1");
-			// check if the account is admin if so set - request.getSession().setAttribute("adminloggedin", "1")
-		} 
-		if (!(request.getParameter("register") == null)) {
-			page = this.loginPage;
-			int adminreg = 0;
-			String usernameRegister = request.getParameter("usernameregister");
-			String passwordRegister = request.getParameter("passwordregister");
-			System.out.println("reguser: " + usernameRegister + " regpass: " + passwordRegister);
-			if (!(request.getParameter("adminregister") == null)) {
-				adminreg = 1;
-			}
-			// send usernameRegister, passwordRegister, adminreg to database here
-		}
-		if (!(request.getParameter("logout") == null)) {
-			page = this.mainPage;
-			request.getSession().setAttribute("loggedin", "0");
-			request.getSession().setAttribute("adminloggedin", "0");
-		}		
-		if (!(request.getParameter("additem") == null)) {
-			page = this.adminPage;
-		}
-		if (!(request.getParameter("checkinformation") == null)) {
-			page = this.adminPage;
-			request.getSession().setAttribute("orderinformation", "Order ID, Email, Total, Date of Delivery");
-		} 
-		System.out.println(request.getParameter("additem") + " " + request.getSession().getAttribute("adminloggedin"));
-		
-		System.out.println("login button pressed: " + request.getParameter("login"));
-		System.out.println("register button pressed: " + request.getParameter("register"));
-		System.out.println("logout button pressed: " + request.getParameter("logout"));
-		System.out.println(request.getSession().getAttribute("loggedin"));
-///////////////////
-		//accessDatabase();
-//////////////////		
-		request.getSession().setAttribute("music1", "holyMolyUno");
-		request.getSession().setAttribute("music2", "holyMoly2");
-		request.getSession().setAttribute("music3", "holyMoly3");
-		request.getSession().setAttribute("music4", "holyMoly4");
-		request.getRequestDispatcher(page).forward(request, response);
+		this.checkLogin(request);
+		this.checkRegister(request);
+		this.checkLogout(request);
+		this.checkAddItem(request);
+		this.checkInformation(request);
+
+		/*
+		 * System.out.println(request.getParameter("additem") + " " +
+		 * request.getSession().getAttribute("adminloggedin"));
+		 * System.out.println("login button pressed: " + request.getParameter("login"));
+		 * System.out.println("register button pressed: " +
+		 * request.getParameter("register"));
+		 * System.out.println("logout button pressed: " +
+		 * request.getParameter("logout"));
+		 * System.out.println(request.getSession().getAttribute("loggedin"));
+		 * accessDatabase();
+		 */
+
+		this.addMusicItems(request);
+		this.addMovieItems(request);
+		this.addComedyItems(request);
+
+		request.getRequestDispatcher(this.page).forward(request, response);
 	}
 
 	/**
@@ -108,6 +86,78 @@ public class VideoCo extends HttpServlet {
 		// TODO Auto-generated method stub
 		// System.out.println("POST is happening");
 		doGet(request, response);
+	}
+
+	private void addMusicItems(HttpServletRequest request) {
+		request.getSession().setAttribute("music1", "holyMolyUno");
+		request.getSession().setAttribute("music2", "holyMoly2");
+		request.getSession().setAttribute("music3", "holyMoly3");
+		request.getSession().setAttribute("music4", "holyMoly4");
+	}
+
+	private void addMovieItems(HttpServletRequest request) {
+		request.getSession().setAttribute("movie1", "hello1");
+		request.getSession().setAttribute("movie2", "hello2");
+		request.getSession().setAttribute("movie3", "hello3");
+		request.getSession().setAttribute("movie4", "hello4");
+	}
+
+	private void addComedyItems(HttpServletRequest request) {
+		request.getSession().setAttribute("comedy1", "bye1");
+		request.getSession().setAttribute("comedy2", "bye2");
+		request.getSession().setAttribute("comedy3", "bye3");
+		request.getSession().setAttribute("comedy4", "bye4");
+	}
+
+	private void checkLogin(HttpServletRequest request) {
+		if (!(request.getParameter("login") == null)) {
+			this.page = this.mainPage;
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			request.getSession().setAttribute("loggedin", "1");
+			request.getSession().setAttribute("adminloggedin", "1");
+			// System.out.println("inputted username: " + username + " password: " +
+			// password);
+			// check if the account is admin if so set -
+			// request.getSession().setAttribute("adminloggedin", "1")
+			// check id, pass, and if admin or not
+		}
+	}
+
+	private void checkRegister(HttpServletRequest request) {
+		if (!(request.getParameter("register") == null)) {
+			this.page = this.loginPage;
+			int adminreg = 0;
+			String usernameRegister = request.getParameter("usernameregister");
+			String passwordRegister = request.getParameter("passwordregister");
+			if (!(request.getParameter("adminregister") == null)) {
+				adminreg = 1;
+			}
+			// send usernameRegister, passwordRegister, adminreg to database here
+		}
+	}
+
+	private void checkLogout(HttpServletRequest request) {
+		if (!(request.getParameter("logout") == null)) {
+			this.page = this.mainPage;
+			request.getSession().setAttribute("loggedin", "0");
+			request.getSession().setAttribute("adminloggedin", "0");
+		}
+	}
+
+	private void checkAddItem(HttpServletRequest request) {
+		if (!(request.getParameter("additem") == null)) {
+			this.page = this.adminPage;
+		}
+	}
+
+	private void checkInformation(HttpServletRequest request) {
+		if (!(request.getParameter("checkinformation") == null)) {
+			this.page = this.adminPage;
+			request.getSession().setAttribute("orderinformation", "Order ID, Email, Total, Date of Delivery");
+		} else {
+			request.getSession().setAttribute("orderinformation", "");
+		}
 	}
 
 	private void accessDatabase() {
