@@ -115,7 +115,7 @@ public class VideoCo extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			request.getSession().setAttribute("loggedin", "1");
-			request.getSession().setAttribute("adminloggedin", "1");
+			request.getSession().setAttribute("adminloggedin", "1"); // all logins are admin currently
 			// System.out.println("inputted username: " + username + " password: " +
 			// password);
 			// check if the account is admin if so set -
