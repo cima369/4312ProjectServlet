@@ -89,24 +89,24 @@ public class VideoCo extends HttpServlet {
 	}
 
 	private void addMusicItems(HttpServletRequest request) {
-		request.getSession().setAttribute("music1", "holyMolyUno");
-		request.getSession().setAttribute("music2", "holyMoly2");
-		request.getSession().setAttribute("music3", "holyMoly3");
-		request.getSession().setAttribute("music4", "holyMoly4");
+		request.getSession().setAttribute("music1", "music1");
+		request.getSession().setAttribute("music2", "music2");
+		request.getSession().setAttribute("music3", "music3");
+		request.getSession().setAttribute("music4", "music4");
 	}
 
 	private void addMovieItems(HttpServletRequest request) {
-		request.getSession().setAttribute("movie1", "hello1");
-		request.getSession().setAttribute("movie2", "hello2");
-		request.getSession().setAttribute("movie3", "hello3");
-		request.getSession().setAttribute("movie4", "hello4");
+		request.getSession().setAttribute("movie1", "movie1");
+		request.getSession().setAttribute("movie2", "movie2");
+		request.getSession().setAttribute("movie3", "movie3");
+		request.getSession().setAttribute("movie4", "movie4");
 	}
 
 	private void addComedyItems(HttpServletRequest request) {
-		request.getSession().setAttribute("comedy1", "bye1");
-		request.getSession().setAttribute("comedy2", "bye2");
-		request.getSession().setAttribute("comedy3", "bye3");
-		request.getSession().setAttribute("comedy4", "bye4");
+		request.getSession().setAttribute("comedy1", "comedy1");
+		request.getSession().setAttribute("comedy2", "comedy2");
+		request.getSession().setAttribute("comedy3", "comedy3");
+		request.getSession().setAttribute("comedy4", "comedy4");
 	}
 
 	private void checkLogin(HttpServletRequest request) {
