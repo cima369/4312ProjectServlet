@@ -40,16 +40,21 @@ body {font-size:16px;}
 
 <fieldset>
 	<legend>Register</legend>
-		<form class='loginForm' action='VideoCo' method='GET'>
+		<form class='loginForm' action='VideoCo' onsubmit="return alertSubmit();" method='GET'>
 			<label for='usernameregister'>Username / Email<BR /></label>
 			<input type='text' id='usernameregister' name='usernameregister'></input> <br/>
 			<label for='passwordregister'>Password<BR /></label>
 			<input type='text' id='passwordregister' name='passwordregister'></input> <br/>
 			<button name='register' value='true'>Register</button>
+			<label for='admin'>Admin</label><input type='checkbox' name='adminregister' checked="checked"></input> <br/>
 		</form>
 </fieldset>
 <br/>
 
-
+<script type="text/javascript">
+function alertSubmit(){
+alert("Registered. Please log in to Continue.");
+} 
+</script>
 </body>
 </html>

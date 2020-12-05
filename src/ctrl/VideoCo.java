@@ -22,6 +22,9 @@ public class VideoCo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONTEXT_APP_NAME = "applicationName";
 	private String appName;
+	private final String mainPage = "/UI.jsp";
+	private final String loginPage = "/SignIn.jsp";
+	private final String adminPage = "/Adminpage.jsp";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -46,29 +49,41 @@ public class VideoCo extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.getSession().setAttribute("applicationName", appName); // pack app name
-		String page = "";
-		final String mainPage = "/UI.jsp";
-		final String loginPage = "/SignIn.jsp";
+		String page = this.mainPage;
 
-		if (request.getParameter("login") == null) {
-			page = mainPage;
-		} else {
+		if(!(request.getParameter("login") == null)) {
+			page = this.mainPage;
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			System.out.println("inputted username: " + username + " password: " + password);
-			page = mainPage;
 			request.getSession().setAttribute("loggedin", "1");
-		}
+			request.getSession().setAttribute("adminloggedin", "1");
+			// check if the account is admin if so set - request.getSession().setAttribute("adminloggedin", "1")
+		} 
 		if (!(request.getParameter("register") == null)) {
-			page = loginPage;
+			page = this.loginPage;
+			int adminreg = 0;
 			String usernameRegister = request.getParameter("usernameregister");
 			String passwordRegister = request.getParameter("passwordregister");
 			System.out.println("reguser: " + usernameRegister + " regpass: " + passwordRegister);
+			if (!(request.getParameter("adminregister") == null)) {
+				adminreg = 1;
+			}
+			// send usernameRegister, passwordRegister, adminreg to database here
 		}
 		if (!(request.getParameter("logout") == null)) {
-			page = mainPage;
+			page = this.mainPage;
 			request.getSession().setAttribute("loggedin", "0");
+			request.getSession().setAttribute("adminloggedin", "0");
+		}		
+		if (!(request.getParameter("additem") == null)) {
+			page = this.adminPage;
 		}
+		if (!(request.getParameter("checkinformation") == null)) {
+			page = this.adminPage;
+			request.getSession().setAttribute("orderinformation", "Order ID, Email, Total, Date of Delivery");
+		} 
+		System.out.println(request.getParameter("additem") + " " + request.getSession().getAttribute("adminloggedin"));
 		
 		System.out.println("login button pressed: " + request.getParameter("login"));
 		System.out.println("register button pressed: " + request.getParameter("register"));

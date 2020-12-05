@@ -29,6 +29,12 @@ body {font-size:16px;}
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
 	<c:choose>
+		<c:when test="${sessionScope.adminloggedin == '1'}">
+			<form class='loginForm' action='VideoCo' method='GET'>
+				<button name='logout' value='true'>Sign Out</button> 
+			</form>	
+			<a href="Adminpage.jsp">Admin Page</a>
+		</c:when>
 		<c:when test="${sessionScope.loggedin == '1'}">
 			<form class='loginForm' action='VideoCo' method='GET'>
 				<button name='logout' value='true'>Sign Out</button> 
@@ -62,12 +68,23 @@ body {font-size:16px;}
   <div class="w3-container" style="margin-top:80px" id="Music">
     <h1 class="w3-xxxlarge w3-text-red"><b>Music</b></h1>
 	<div class="grid-container">
-	  <div class="item1">1 ${music1}</div>
-	  <div class="item2">2 ${music2}</div>
-	  <div class="item3">3 ${music3}</div>  
-	  <div class="item4">4 ${music4}</div>
-	  <div class="item5">5</div>
-	  <div class="item6">6</div>
+	  <div class="item1">1 ${music1} $45</div>
+		<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmusic1' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item2">${music2}</div>
+		<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmusic2' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item3">${music3}</div> 
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmusic3' value='true'>Add To Cart</button>
+		</form> 
+	  <div class="item4">${music4}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmusic4' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item5">${music5}</div>
 	</div>
   </div>
 
@@ -75,12 +92,23 @@ body {font-size:16px;}
   <div class="w3-container" id="Movies" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Movies</b></h1>
 	<div class="grid-container">
-	  <div class="item1">1</div>
-	  <div class="item2">2</div>
-	  <div class="item3">3</div>  
-	  <div class="item4">4</div>
-	  <div class="item5">5</div>
-	  <div class="item6">6</div>
+	  <div class="item1">${movie1}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmovie1' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${movie2}</div>
+	    <form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmovie2' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${movie3}</div>
+	    <form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmovie3' value='true'>Add To Cart</button>
+		</form>  
+	  <div class="item1">${movie4}</div>
+	    <form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartmovie4' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${movie5}</div>
 	</div>
   </div>
   
@@ -88,12 +116,23 @@ body {font-size:16px;}
   <div class="w3-container" id="Comedy" style="margin-top:75px">
     <h1 class="w3-xxxlarge w3-text-red"><b>Comedy</b></h1>
 	<div class="grid-container">
-	  <div class="item1">1</div>
-	  <div class="item2">2</div>
-	  <div class="item3">3</div>  
-	  <div class="item4">4</div>
-	  <div class="item5">5</div>
-	  <div class="item6">6</div>
+	  <div class="item1">${comedy1}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartcomedy1' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${comedy2}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartcomedy2' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${comedy3}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartcomedy3' value='true'>Add To Cart</button>
+		</form> 
+	  <div class="item1">${comedy4}</div>
+	  	<form class='loginForm' action='VideoCo' method='GET'>
+			<button name='cartcomedy4' value='true'>Add To Cart</button>
+		</form>
+	  <div class="item1">${comedy5}</div> 
 	</div>
   </div>
   
@@ -113,13 +152,6 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
-}
 </script>
 
 </body>
